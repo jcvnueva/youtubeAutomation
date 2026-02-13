@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fce4ec; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; 
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            padding: 20px;
+        }
+
+        /* Images */
+        .gif-container img {
+            max-width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap; 
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yes-btn {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Success Page Styling */
+        #success-page {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .message {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: #333;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="question-page">
+        <div class="gif-container">
+            <img id="main-img" src="questionGIF.gif" alt="Pretty Please">
+        </div>
+        <h1 id="question-text">Lemlem, will you be my Valentine?</h1>
+        <div class="btn-container">
+            <button id="yes-btn" onclick="handleYes()">Yes</button>
+            <button id="no-btn" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <div class="container" id="success-page">
+        <div class="gif-container">
+             <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" alt="Celebration">
+        </div>
+        <h1>YAY! Thank you for saying YES! ❤️</h1>
+        
+        <div class="message">
+            <p><strong>Special Message to you:</strong></p>
+            <p>Hey Lemlem, I know I've said this a lot, but I really am grateful to God that I am so blessed to have you in my life. You pour color to my monotone moments, you brighten up my day; You are the sunshine in my life. So thank you for letting me do something nice for you on the day of hearts. I love you so much. Happy Heart's Day. my love! I'll see you soon. 🌹</p>
+        </div>
+
+        <div class="photo-gallery">
+            <img src="couplePic1.jpeg" alt="Us 1">
+            <img src="couplePic2.jpg" alt="Us 2">
+        </div>
+    </div>
+
+    <script>
+        const questionPage = document.getElementById('question-page');
+        const successPage = document.getElementById('success-page');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const mainImg = document.getElementById('main-img');
+        const questionText = document.getElementById('question-text');
+
+        // Text that appears on the "No" button
+        const noTexts = [
+            "Are you sure?", 
+            "Really sure?", 
+            "Pleaseee", 
+            "Don't do this. T^T", 
+            "Look at this face", 
+            "I'm gonna cry...", 
+            "You're breaking my heart </3", 
+            "Last chance"
+        ];
+
+        
+        const sadImages = [
+            "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif", 
+            "https://media.giphy.com/media/Ty9Sg8oHghPWg/giphy.gif", 
+            "https://media.giphy.com/media/3o6wrvdHFbwBrUFenu/giphy.gif" 
+        ];
+
+        let clickCount = 0;
+
+        function handleNo() {
+            clickCount++;
+            
+            
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            const currentPadding = parseFloat(window.getComputedStyle(yesBtn).padding);
+            yesBtn.style.fontSize = `${currentSize * 1.5}px`;
+            yesBtn.style.padding = `${currentPadding * 1.2}px`; 
+
+            
+            const textIndex = Math.min(clickCount - 1, noTexts.length - 1);
+            noBtn.innerText = noTexts[textIndex];
+
+            
+            const imgIndex = Math.min(clickCount - 1, sadImages.length - 1);
+            mainImg.src = sadImages[imgIndex];
+        }
+
+        function handleYes() {
+            
+            questionPage.style.display = 'none';
+            successPage.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
